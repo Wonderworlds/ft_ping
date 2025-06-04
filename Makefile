@@ -2,15 +2,17 @@ SHELL				=	/bin/sh
 
 PROGNAME			:=	ft_ping
 
-LIBFT				:=	libft/libft.a
+# LIBFT				:=	libft/libft.a
 
-INCLUDEDIR			:=	libft/includes
+INCLUDEDIR			:=	includes \
+						# libft/includes \
 
+SRCSDIR				:=	src
 OBJDIR				:=	./obj
 BONUSOBJDIR			:=	$(OBJDIR)_bonus
 DEBUGDIR			:=	./debugobj
 
-SRCS				:=	$(addprefix src/,		main.c)		
+SRCS				:=	$(addprefix ${SRCSDIR}/,  main.c)		
 
 CC					:=	cc
 RM					:=	rm
@@ -31,7 +33,7 @@ ifdef DEBUG
 	OUTDIR			:=	$(DEBUGDIR)
 endif
 
-$(OUTDIR)/%.o		:	$(SRCS)/%.c | $(OUTDIR)
+$(OUTDIR)/%.o		:	%.c | $(OUTDIR)
 	@mkdir -p $(dir $@)
 	$(CC) -c -MMD -MP $(CCFLAGS) $(OPTFLAG) $(addprefix -I ,$(INCLUDEDIR)) $< -o $@
 
